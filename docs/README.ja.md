@@ -130,6 +130,7 @@ Git ワークフローコマンド・スキル。
 | コマンド | create-pr | 現在のブランチから自動 push + `claude-auto` ラベル付きで PR を作成 |
 | コマンド | push | 安全チェック付きでリモートに push |
 | スキル | gitignore | プロジェクト自動検出による .gitignore の生成・更新 |
+| スキル | editorconfig | ファイルタイプ自動検出による .editorconfig の生成・更新 |
 | スキル | pull-request | GitHub PR ワークフローの自動化（rebase、コンフリクト解決、説明文生成） |
 | スキル | auto-merge | `claude-auto` ラベル付き PR の自動承認・自動マージワークフロー生成 |
 
