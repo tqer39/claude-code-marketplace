@@ -10,12 +10,108 @@ A centralized marketplace that distributes shared skills and commands across ~20
 
 ```bash
 # Add marketplace
-claude plugin marketplace add tqer39/claude-code-marketplace
+/plugin marketplace add tqer39/claude-code-marketplace
 
 # Install plugins
-claude plugin install common-ci@tqer39-plugins
-claude plugin install terraform@tqer39-plugins
-claude plugin install python-uv@tqer39-plugins
+/plugin install common-ci@tqer39-plugins
+/plugin install terraform@tqer39-plugins
+/plugin install python-uv@tqer39-plugins
+```
+
+## Usage
+
+### Adding the marketplace
+
+From within a Claude Code session:
+
+```bash
+/plugin marketplace add tqer39/claude-code-marketplace
+```
+
+Or configure it in `.claude/settings.json` for your project:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "tqer39-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "tqer39/claude-code-marketplace"
+      }
+    }
+  }
+}
+```
+
+### Installing plugins
+
+Install individual plugins by scope:
+
+```bash
+# User scope (you, all projects) — default
+/plugin install common-ci@tqer39-plugins
+
+# Project scope (shared with team via .claude/settings.json)
+/plugin install common-ci@tqer39-plugins --scope project
+
+# Local scope (you, this project only)
+/plugin install common-ci@tqer39-plugins --scope local
+```
+
+### Managing plugins
+
+```bash
+# Browse all available plugins
+/plugin
+
+# Enable/disable without uninstalling
+/plugin enable common-ci@tqer39-plugins
+/plugin disable common-ci@tqer39-plugins
+
+# Uninstall
+/plugin uninstall common-ci@tqer39-plugins
+
+# Reload after changes
+/reload-plugins
+```
+
+### Updating
+
+```bash
+# Update all marketplaces
+/plugin marketplace update
+
+# Update a specific marketplace
+/plugin marketplace update tqer39-plugins
+```
+
+### Removing the marketplace
+
+```bash
+/plugin marketplace remove tqer39-plugins
+```
+
+> **Note:** Removing a marketplace also uninstalls all plugins from it.
+
+### Pre-configuring plugins per project
+
+Add to your project's `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "tqer39-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "tqer39/claude-code-marketplace"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "common-ci@tqer39-plugins": true,
+    "terraform@tqer39-plugins": true
+  }
+}
 ```
 
 ## Plugins
