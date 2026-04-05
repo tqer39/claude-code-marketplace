@@ -1,0 +1,31 @@
+{
+  "name": "tqer39-plugins",
+  "owner": {
+    "name": "tqer39"
+  },
+  "metadata": {
+    "description": "Personal SRE/DevOps plugins for Claude Code",
+    "version": "0.1.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "common-ci",
+      "source": "common-ci",
+      "description": "Common CI/CD skills shared across all repositories",
+      "version": "0.1.0"
+    },
+    {
+      "name": "terraform",
+      "source": "terraform",
+      "description": "Terraform review, security, and best practices",
+      "version": "0.1.0"
+    },
+    {
+      "name": "python-uv",
+      "source": "python-uv",
+      "description": "Python + uv workflow and supply chain security",
+      "version": "0.1.0"
+    }
+  ]
+}
