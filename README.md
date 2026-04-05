@@ -17,6 +17,7 @@ A centralized marketplace that distributes shared skills and commands across ~20
 /plugin install git@tqer39-plugins
 /plugin install security@tqer39-plugins
 /plugin install terraform@tqer39-plugins
+/plugin install agent-config@tqer39-plugins
 ```
 
 ## Usage
@@ -128,7 +129,6 @@ Common CI/CD skills shared across all repositories.
 | commit-convention | Enforce Conventional Commits format and provide commit message suggestions |
 | github-actions | GitHub Actions workflow best practices and troubleshooting |
 | gitignore | Generate and update .gitignore files with automatic project detection |
-| agent-config-init | Initialize unified LLM coding agent configuration (AGENTS.md) |
 | redesign | Architectural analysis and redesign proposal workflow |
 | auto-merge | Generate auto-approve and auto-merge workflow for PRs with `claude-auto` label |
 
@@ -148,6 +148,14 @@ Security review skills: supply chain, dependency auditing, and vulnerability det
 | Skill | Description |
 |-------|-------------|
 | supply-chain | Audit supply chain security: lockfile integrity, dependency pinning, typosquatting detection, GitHub Actions SHA pinning, vulnerability scanning config |
+
+### agent-config
+
+LLM coding agent configuration: AGENTS.md creation and tool-specific symlink management.
+
+| Skill | Description |
+|-------|-------------|
+| agent-config-init | Initialize unified LLM coding agent configuration (AGENTS.md) with symlinks to Claude Code, Cursor, Copilot, Gemini CLI |
 
 ### terraform
 
