@@ -22,6 +22,12 @@
       "version": "0.1.0"
     },
     {
+      "name": "git",
+      "source": "git",
+      "description": "Git workflow commands: auto-commit and PR creation",
+      "version": "0.1.0"
+    },
+    {
       "name": "python-uv",
       "source": "python-uv",
       "description": "Python + uv workflow and supply chain security",

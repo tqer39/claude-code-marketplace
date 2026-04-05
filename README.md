@@ -14,6 +14,7 @@ A centralized marketplace that distributes shared skills and commands across ~20
 
 # Install plugins
 /plugin install common-ci@tqer39-plugins
+/plugin install git@tqer39-plugins
 /plugin install terraform@tqer39-plugins
 /plugin install python-uv@tqer39-plugins
 ```
@@ -129,6 +130,15 @@ Common CI/CD skills shared across all repositories.
 | gitignore | Generate and update .gitignore files with automatic project detection |
 | agent-config-init | Initialize unified LLM coding agent configuration (AGENTS.md) |
 | redesign | Architectural analysis and redesign proposal workflow |
+
+### git
+
+Git workflow commands.
+
+| Command | Description |
+|---------|-------------|
+| auto-commit | Auto stage and commit with emoji prefix + Japanese summary |
+| create-pr | Create a PR from the current branch with auto push and `claude-auto` label |
 
 ### terraform
 
