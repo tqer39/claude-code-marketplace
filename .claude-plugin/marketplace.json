@@ -5,33 +5,33 @@
   },
   "metadata": {
     "description": "Personal SRE/DevOps plugins for Claude Code",
-    "version": "0.1.0",
-    "pluginRoot": "./plugins"
+    "version": "0.1.0"
   },
   "plugins": [
     {
       "name": "git",
-      "source": "git",
-      "description": "Git workflow commands and skills: auto-commit, branch creation, PR creation, push, gitignore, pull-request, and auto-merge",
-      "version": "0.1.0"
+      "source": "./plugins/git",
+      "description": "Git workflow commands and skills: auto-commit, branch creation, PR creation, push, gitignore, pull-request, and auto-merge"
     },
     {
       "name": "architecture",
-      "source": "architecture",
-      "description": "Architecture analysis and redesign proposal skills: redesign, editorconfig",
-      "version": "0.1.0"
+      "source": "./plugins/architecture",
+      "description": "Architecture analysis and redesign proposal skills: redesign, editorconfig"
     },
     {
       "name": "marketplace",
-      "source": "marketplace",
-      "description": "Marketplace validation and management skills",
-      "version": "0.1.0"
+      "source": "./plugins/marketplace",
+      "description": "Marketplace validation and management skills"
     },
     {
       "name": "security",
-      "source": "security",
-      "description": "Security review skills: supply chain, dependency auditing, and vulnerability detection",
-      "version": "0.1.0"
+      "source": "./plugins/security",
+      "description": "Security review skills: supply chain, dependency auditing, and vulnerability detection"
+    },
+    {
+      "name": "agent-config",
+      "source": "./plugins/agent-config",
+      "description": "LLM coding agent configuration and symlink management"
     }
   ]
 }
