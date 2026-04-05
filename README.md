@@ -15,6 +15,7 @@ A centralized marketplace that distributes shared skills and commands across ~20
 # Install plugins
 /plugin install common-ci@tqer39-plugins
 /plugin install git@tqer39-plugins
+/plugin install security@tqer39-plugins
 /plugin install terraform@tqer39-plugins
 /plugin install python-uv@tqer39-plugins
 ```
@@ -140,6 +141,14 @@ Git workflow commands.
 | auto-commit | Auto stage and commit with emoji prefix + Japanese summary |
 | create-pr | Create a PR from the current branch with auto push and `claude-auto` label |
 
+### security
+
+Security review skills: supply chain, dependency auditing, and vulnerability detection.
+
+| Skill | Description |
+|-------|-------------|
+| supply-chain | Audit supply chain security: lockfile integrity, dependency pinning, typosquatting detection, GitHub Actions SHA pinning, vulnerability scanning config |
+
 ### terraform
 
 Terraform review, security, and best practices.
@@ -151,12 +160,11 @@ Terraform review, security, and best practices.
 
 ### python-uv
 
-Python + uv workflow and supply chain security.
+Python project workflow using uv package manager.
 
 | Skill | Description |
 |-------|-------------|
 | uv-workflow | Python project workflow using uv package manager |
-| supply-chain-security | Python/PyPI supply chain security checks and dependency auditing |
 
 ## Development
 

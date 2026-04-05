@@ -1,5 +1,5 @@
 {
   "name": "python-uv",
-  "description": "Python + uv workflow and supply chain security",
+  "description": "Python project workflow using uv package manager",
   "version": "0.1.0"
 }

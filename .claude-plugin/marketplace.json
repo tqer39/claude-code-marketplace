@@ -28,9 +28,15 @@
       "version": "0.1.0"
     },
     {
+      "name": "security",
+      "source": "security",
+      "description": "Security review skills: supply chain, dependency auditing, and vulnerability detection",
+      "version": "0.1.0"
+    },
+    {
       "name": "python-uv",
       "source": "python-uv",
-      "description": "Python + uv workflow and supply chain security",
+      "description": "Python project workflow using uv package manager",
       "version": "0.1.0"
     }
   ]
