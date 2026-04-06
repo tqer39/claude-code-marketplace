@@ -1,11 +1,11 @@
 ---
 name: gitignore
-description: Generate and update .gitignore files using the gitignore.io API with automatic project detection. Use this skill whenever the user mentions .gitignore, wants to ignore files in git, needs gitignore templates, asks about what to put in .gitignore, creates a new project and needs a .gitignore, or asks to clean up tracked files. Also use this skill when setting up a new repository, initializing a project, or when the user says things like "set up git" or "init project" — a good .gitignore is part of proper project setup.
+description: Generate and update .gitignore files using the gitignore.io API with automatic project detection. Use when the user mentions .gitignore or wants to ignore files in git. Also applies when setting up a new repository.
 ---
 
 # gitignore
 
-Generate or update `.gitignore` files by auto-detecting project technologies and fetching best-practice templates from the gitignore.io API.
+Generate or update `.gitignore` files by auto-detecting project technologies and fetching templates from gitignore.io.
 
 ## Workflow
 
@@ -21,7 +21,7 @@ Collect all matched template names into a deduplicated list.
 
 ### Step 2: Confirm Templates with User
 
-Present the detected templates to the user in a clear list, grouped by category (Languages, Frameworks, Tools, Editors, OS). Ask the user to:
+Present the detected templates in a grouped list (Languages, Frameworks, Tools, Editors and OS). Ask the user to:
 
 - Add any templates that were missed
 - Remove any templates that don't apply
@@ -83,14 +83,14 @@ Add a blank line and `# Custom rules` header between the API section and the ori
 
 **Case C — Existing `.gitignore` with API markers:**
 
-Replace the section from `# Created by https://www.toptal.com/developers/gitignore/api/...` through `# End of https://www.toptal.com/developers/gitignore/api/...` (inclusive) with the new API content. Preserve everything before the header and everything after the footer exactly as-is.
+Replace the section from `# Created by ...` through `# End of ...` (inclusive) with the new API content. Preserve everything before the header and after the footer as-is.
 
 #### Edge Cases
 
 - **Header exists but no footer**: Replace from the header to the end of the file. Warn the user that no footer marker was found and the content after the header was treated as API-generated.
 - **Multiple marker pairs**: Replace only the first occurrence. Warn the user about duplicate marker sections.
 - **Line endings**: Always use LF (`\n`), not CRLF.
-- **Subdirectory `.gitignore`**: Only modify the project root `.gitignore` unless the user explicitly requests otherwise.
+- **Subdirectory `.gitignore`**: Only modify the project root `.gitignore` unless the user requests otherwise.
 
 ### Step 6: Verify and Report
 

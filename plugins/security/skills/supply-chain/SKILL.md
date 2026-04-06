@@ -14,7 +14,7 @@ description: |
 
 | 事例 | 攻撃手法 | 教訓 |
 |------|----------|------|
-| axios (npm) | `axio`, `axois` 等のタイポスクワットで env 変数を窃取 | 新規依存追加時の名前検証が必須 |
+| axios (npm) | `axio`, `axois` 等のタイポスクワットで env 変数を窃取 | 依存の追加時に名前検証が必須 |
 | trivy (GitHub Actions) | `trivy-action@master` のタグ書き換えによる改竄 | Actions は full SHA でピン留めすべき |
 | LiteLLM (PyPI) | `litelm` タイポスクワットで post-install リバースシェル | pip-audit + hash pinning が有効 |
 
@@ -42,20 +42,24 @@ description: |
   - pip: `--require-hashes`
 
 **判定:**
+
 - lockfile 未コミット → **CRITICAL**
 - frozen install 未設定 → **HIGH**
 
 ### 3. 依存ピン留めチェック
 
 **Node.js:**
+
 - `package.json` の dependencies で `^` / `~` を使用しているものを列挙
 - `devDependencies` は `^` を許容（ただし警告は出す）
 
 **Python:**
+
 - `pyproject.toml` / `requirements.txt` でバージョン未固定のものを列挙
 - hash pinning の有無を確認（`--require-hashes` または `uv.lock`）
 
 **判定:**
+
 - 本番依存でバージョン範囲指定 → **MEDIUM**
 - hash pinning なし → **LOW**（lockfile があれば許容）
 
@@ -73,6 +77,7 @@ description: |
 - npm/PyPI のダウンロード数が極端に少ないパッケージ
 
 **手順:**
+
 1. `git diff` で lockfile の差分から新規追加パッケージを抽出
 2. パッケージ名を上記パターンと照合
 3. 疑わしいものがあれば **WARNING** として報告
@@ -86,10 +91,12 @@ description: |
 - タグ + SHA コメントパターンも OK（例: `actions/checkout@abc123 # v4`）
 
 **判定:**
+
 - サードパーティ action がタグ参照 → **HIGH**
 - 公式 actions（`actions/*`）がタグ参照 → **MEDIUM**
 
 **改善提案:**
+
 - Renovate 設定に `helpers:pinGitHubActionDigests` の追加を提案
 - 各 action の SHA を調べて書き換え例を提示
 
@@ -103,6 +110,7 @@ CI 設定ファイル（`.github/workflows/*.yml`）で以下の存在を確認:
 - Dependabot / Renovate の脆弱性アラート設定
 
 **判定:**
+
 - CI に脆弱性スキャンなし → **HIGH**
 - Dependabot/Renovate 未設定 → **MEDIUM**
 
@@ -113,11 +121,12 @@ CI 設定ファイル（`.github/workflows/*.yml`）で以下の存在を確認:
 - コンテナイメージ: Cosign/Sigstore 署名の有無
 
 **判定:**
+
 - プロベナンス検証なし → **LOW**（推奨レベル）
 
 ## 出力フォーマット
 
-```markdown
+````markdown
 # Supply Chain Security Audit Report
 
 ## Summary
@@ -143,7 +152,7 @@ CI 設定ファイル（`.github/workflows/*.yml`）で以下の存在を確認:
   ```
 
 ...（以下同様）
-```
+````
 
 ## 注意事項
 

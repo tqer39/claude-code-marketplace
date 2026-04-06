@@ -1,11 +1,11 @@
 ---
 name: agent-config-init
-description: Initialize a unified LLM coding agent configuration. Creates AGENTS.md as the single source of truth and symlinks it to tool-specific config files. Use when the user wants to set up agent config, create AGENTS.md, unify AI tool settings, or bootstrap coding guidelines for a project.
+description: Initialize a unified LLM coding agent configuration. Creates AGENTS.md as the single source of truth and symlinks it to tool-specific config files. Use when the user wants to set up agent config or unify AI tool settings.
 ---
 
 # Agent Config Init
 
-Create `AGENTS.md` as the single source of truth for LLM coding agent guidelines. Then symlink it to each tool's config file. This keeps all agents (Claude Code, Codex, Gemini CLI, Cursor, Copilot) aligned on the same rules with zero duplication.
+Create `AGENTS.md` as the single source of truth for LLM coding agent guidelines. Then symlink it to each tool's config file. This keeps all agents aligned on the same rules with zero duplication.
 
 Based on arxiv 2602.11988: concise context files (~32 lines) outperform verbose ones.
 

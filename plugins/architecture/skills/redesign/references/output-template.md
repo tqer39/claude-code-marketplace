@@ -155,7 +155,7 @@ Additional references, related ADRs, recommended resources.
 
 1. **Only include sections that have content.** If there are no technology stack changes, omit that section entirely. Do not include empty sections.
 
-2. **Never fabricate information.** Every claim must be grounded in code or patterns actually found during the reconnaissance phase. If uncertain, say so explicitly.
+2. **Never fabricate information.** Every claim must be grounded in code or patterns found during reconnaissance. If uncertain, say so.
 
 3. **Use GitHub callout syntax** where appropriate:
 

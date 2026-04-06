@@ -5,13 +5,13 @@ description: Generate and update .editorconfig files by auto-detecting project f
 
 # editorconfig
 
-Generate or update `.editorconfig` files by scanning the project for file types and applying best-practice indentation, charset, and whitespace rules.
+Generate or update `.editorconfig` files by scanning the project for file types. Applies best-practice indentation and whitespace rules.
 
 ## Workflow
 
 ### Step 1: Detect Project File Types
 
-Scan the project root (excluding `.git/`, `node_modules/`, `vendor/`, `dist/`, `build/`, `__pycache__/`) to identify file extensions and special filenames. Use the detection table in `references/filetype-rules.md` to map detected files to `.editorconfig` sections.
+Scan the project root to identify file extensions and special filenames. Exclude common generated directories (`.git/` and `node_modules/` and `vendor/` and `dist/` and `build/` and `__pycache__/`). Use the detection table in `references/filetype-rules.md` to map detected files to `.editorconfig` sections.
 
 Run:
 
@@ -26,13 +26,13 @@ find . -type f \
   | sed 's/.*\///' | sed 's/.*\./\./' | sort | uniq -c | sort -rn
 ```
 
-Also check for special filenames: `Makefile`, `justfile`, `Brewfile`, `Dockerfile`, `Vagrantfile`, `Gemfile`, `Rakefile`.
+Also check for special filenames: `Makefile`, `justfile`, `Brewfile`, `Dockerfile`. Additionally check `Vagrantfile`, `Gemfile`, `Rakefile`.
 
 ### Step 2: Build Rule Set
 
 Using the detection results and the reference table:
 
-1. Always start with the `[*]` base section (charset, end_of_line, insert_final_newline, indent_size, indent_style, trim_trailing_whitespace).
+1. Always start with the `[*]` base section (charset, end_of_line, insert_final_newline, indent_size). Also set indent_style and trim_trailing_whitespace.
 2. Add sections only for file types actually found in the project.
 3. Only add a section when it differs from the `[*]` defaults.
 
@@ -77,7 +77,7 @@ Add `root = true` at the top (after the comment header) and warn the user that i
 #### Edge Cases
 
 - **Line endings**: Always use LF (`\n`) in the `.editorconfig` file itself.
-- **Monorepo / subdirectory `.editorconfig`**: Only modify the project root `.editorconfig` unless the user explicitly requests otherwise.
+- **Monorepo / subdirectory `.editorconfig`**: Only modify the project root `.editorconfig`. Change subdirectory files only if the user explicitly requests it.
 - **Conflicting rules**: If an existing rule contradicts the proposed rule, always ask the user which to keep.
 
 ### Step 5: Verify and Report

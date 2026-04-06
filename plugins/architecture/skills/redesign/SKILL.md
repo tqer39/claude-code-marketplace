@@ -1,13 +1,13 @@
 ---
 name: redesign
-description: Design or redesign a project's architecture from scratch. Use this skill whenever the user asks about redesigning, rethinking, or re-architecting a project or part of a project. Also use when the user says things like "もしゼロから作り直すなら", "設計を見直したい", "アーキテクチャを再設計", "このプロジェクトの理想的な構成は", "if I were to start over", "what would you change about this architecture", "redesign this", "how should this project be structured", "設計レビューしたい", "技術的負債を解消したい", "リファクタリングの方針を立てたい". Use even when the user asks vaguely about improving project structure, cleaning up technical debt, or wanting a fresh perspective on their codebase.
+description: Design or redesign a project's architecture from scratch. Use when the user asks about redesigning or re-architecting a project. Trigger phrases include "設計を見直したい", "アーキテクチャを再設計", "redesign this", "if I were to start over".
 ---
 
 # redesign
 
-Analyze a project's architecture and produce a structured redesign proposal through a four-phase process: reconnaissance, analysis, dialogue, and proposal.
+Analyze a project's architecture and produce a structured redesign proposal. The process has four phases: reconnaissance, analysis, dialogue, and proposal.
 
-Unlike mechanical workflow skills, this skill is a thinking process. The goal is to deeply understand the codebase, have a genuine conversation about tradeoffs, and produce a proposal that's honest about what's working and what isn't. If the current design is sound, say so — don't invent problems to justify a redesign.
+Unlike mechanical workflow skills, this skill is a thinking process. The goal is to deeply understand the codebase and have a genuine conversation about tradeoffs. The proposal should be honest about what works and what doesn't. If the current design is sound, say so.
 
 ## Locale
 
@@ -21,9 +21,9 @@ The goal is to build a mental model of the project before forming opinions.
 
 Ask the user what they want to redesign:
 
-- The entire project?
-- A specific subsystem or module?
-- A particular concern (e.g., data layer, API surface, deployment)?
+- The entire project
+- A specific subsystem or module
+- A particular concern (e.g., data layer, API surface, deployment)
 
 For monorepos, narrow down to specific packages before proceeding. Don't try to redesign everything at once.
 
@@ -58,12 +58,12 @@ Categorize the project to calibrate the depth of analysis:
 
 Ask the user about constraints that shape the design space. Don't ask all at once — weave these into the conversation naturally:
 
-- **Domain**: What does this project actually do? What's the core problem it solves?
-- **Team**: How many people work on this? What's their experience level?
-- **Deployment**: Where does this run? Cloud, on-prem, edge, CLI?
-- **Technical constraints**: Must it stay in the current language/framework? Are there integration requirements?
-- **Appetite for change**: Is the user looking for incremental improvements or willing to consider a significant rewrite?
-- **Timeline**: Is there urgency, or is this exploratory?
+- **Domain**: What the project does and the core problem it solves.
+- **Team**: Team size and experience level.
+- **Deployment**: Where the project runs (cloud, on-prem, edge, CLI).
+- **Technical constraints**: Whether it must stay in the current language/framework. Integration requirements.
+- **Appetite for change**: Whether the user wants incremental improvements or is open to a significant rewrite.
+- **Timeline**: Whether there is urgency, or this is exploratory.
 
 If the user doesn't know or doesn't care about some of these, use reasonable defaults and move on.
 
@@ -99,7 +99,7 @@ Don't force-fit pattern names onto the codebase. If the project has its own impl
 Identify specific areas of friction:
 
 - **Coupling hotspots**: Changes in module A frequently require changes in module B
-- **Abstraction mismatches**: An abstraction that doesn't match how it's actually used (over-abstracted or under-abstracted)
+- **Abstraction mismatches**: An abstraction that doesn't match how it's used (over-abstracted or under-abstracted)
 - **Knowledge silos**: Code that only one person understands (detectable from git blame patterns)
 - **Churn**: Files that change in every PR (from git history)
 
@@ -107,9 +107,9 @@ Identify specific areas of friction:
 
 Before proposing solutions, share your analysis with the user. Present it conversationally, not as a formal report. Ask for their reaction:
 
-- "Does this match your experience?"
-- "Are there pain points I missed?"
-- "Is anything I flagged actually intentional?"
+- "Does this match your experience."
+- "Are there pain points I missed."
+- "Is anything I flagged actually intentional."
 
 This step matters. Your analysis might be wrong, and the user has context you don't.
 
@@ -127,15 +127,15 @@ Based on the analysis, present 2-3 possible directions. Typically:
 
 For each direction, be concrete about what changes and what stays. Don't present vague platitudes — give specific examples of what the code would look like.
 
-Not every project needs all three options. A small project might only warrant "keep it" vs. "rewrite it." A project with a fundamentally sound architecture might only need targeted improvements.
+Not every project needs all three options. A small project might only warrant "keep it" vs. "rewrite it." Sound architectures might only need targeted fixes.
 
 ### 3.2 Discuss Tradeoffs
 
 Help the user think through tensions:
 
-- **Simplicity vs. flexibility**: A simpler design is easier to understand but harder to extend. Which matters more for this project?
-- **Migration speed vs. quality**: Can the team afford a long migration, or do they need quick wins?
-- **Consistency vs. pragmatism**: Is it worth rewriting working code just for consistency?
+- **Simplicity vs. flexibility**: A simpler design is easier to understand but harder to extend. Determine which matters more for this project.
+- **Migration speed vs. quality**: Consider whether the team can afford a long migration or needs quick wins.
+- **Consistency vs. pragmatism**: Evaluate whether rewriting working code for consistency is worthwhile.
 
 ### 3.3 Reach Agreement
 
@@ -186,7 +186,7 @@ Some projects grow organically without deliberate architecture. In this case:
 
 ### User Wants Validation, Not Change
 
-If the user is really asking "is my architecture OK?", and it is:
+If the user is really asking "is my architecture OK", and it is:
 
 - Clearly state that the current design is sound
 - Point out specific strengths

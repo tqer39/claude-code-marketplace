@@ -1,6 +1,6 @@
 # Architecture Analysis Patterns
 
-A compact catalog of patterns for evaluating and proposing architectures. Each entry describes when a pattern fits, when it doesn't, and what you trade away by choosing it. Use this as a reference during Phase 2 (Analysis) — don't force patterns onto a codebase that has its own working conventions.
+A compact catalog of patterns for evaluating and proposing architectures. Each entry describes when a pattern fits, when it doesn't, and what you trade away. Use this as a reference during Phase 2 (Analysis). Do not force patterns onto a codebase that has its own working conventions.
 
 ## Structural Patterns
 
@@ -22,20 +22,20 @@ Monolith with enforced module boundaries (separate packages/namespaces with expl
 
 Independently deployable services communicating over network boundaries.
 **Fits**: Large organizations, components with fundamentally different scaling/deployment needs, polyglot requirements.
-**Doesn't fit**: Small teams, early-stage products, tightly coupled domains. Almost always premature for teams under ~20 engineers.
-**Tradeoff**: Independent deployment and scaling, but massive increase in operational complexity (networking, observability, data consistency).
+**Doesn't fit**: Small teams, early-stage products, tightly coupled domains. Premature for teams under ~20 engineers.
+**Tradeoff**: Independent deployment and scaling. Massive increase in operational complexity (networking, observability, data consistency).
 
 ### Serverless / FaaS
 
 Event-driven functions deployed individually, managed by the platform.
-**Fits**: Event-driven workloads, sporadic traffic, glue code, quick prototypes, cost-sensitive low-traffic apps.
+**Fits**: Event-driven workloads, sporadic traffic, glue code, quick prototypes and cost-sensitive low-traffic apps.
 **Doesn't fit**: Long-running processes, low-latency requirements, complex stateful workflows.
-**Tradeoff**: Near-zero operational overhead and cost-efficient at low scale, but cold starts, vendor lock-in, and debugging difficulty.
+**Tradeoff**: Near-zero operational overhead and cost-efficient at low scale. Downsides include cold starts, vendor lock-in, and debugging difficulty.
 
 ### Event-Driven Architecture
 
 Components communicate through events (messages/streams) rather than direct calls.
-**Fits**: Workflows with multiple independent reactions to the same trigger, audit requirements, eventual consistency is acceptable.
+**Fits**: Workflows with multiple independent reactions to the same trigger. Audit requirements where eventual consistency is acceptable.
 **Doesn't fit**: Workflows requiring immediate consistency, simple CRUD apps, teams unfamiliar with async patterns.
 **Tradeoff**: Excellent decoupling and extensibility, but harder to trace, debug, and reason about ordering.
 
@@ -83,13 +83,13 @@ Domain objects contain both data and persistence logic (e.g., `user.save()`).
 Separate models for reading and writing data.
 **Fits**: Asymmetric read/write loads, complex read projections, systems where read and write models naturally differ.
 **Doesn't fit**: Simple CRUD, symmetric read/write patterns, small teams.
-**Tradeoff**: Optimized read and write paths independently, but increased system complexity and eventual consistency challenges.
+**Tradeoff**: Optimized read and write paths independently. Increases system complexity and eventual consistency challenges.
 
 ### Event Sourcing
 
 Store state as a sequence of events rather than current state snapshots.
 **Fits**: Audit-critical systems, complex temporal queries, undo/replay requirements.
-**Doesn't fit**: Simple state management, systems needing fast arbitrary queries, teams without event sourcing experience.
+**Doesn't fit**: Simple state management, systems needing fast arbitrary queries, inexperienced teams.
 **Tradeoff**: Complete audit trail and time-travel debugging, but complex to implement, query, and evolve schemas.
 
 ## Common Antipatterns
@@ -104,36 +104,36 @@ A single class or module that knows too much and does too much. Symptom: one fil
 
 Module A depends on B, which depends on A (directly or transitively).
 **Detection**: Import analysis, build tool warnings, or runtime errors during refactoring.
-**Resolution**: Extract shared logic into a third module, use dependency inversion, or merge if the modules are not actually separate concerns.
+**Resolution**: Extract shared logic into a third module, use dependency inversion, or merge tightly coupled modules.
 
 ### Leaky Abstraction
 
 An abstraction that forces callers to understand internal implementation details.
-**Detection**: Callers frequently reach into internals, workaround code near abstraction boundaries, error handling that exposes implementation details.
+**Detection**: Callers reach into internals, workaround code near abstraction boundaries, leaked implementation details.
 **Resolution**: Redesign the abstraction's interface to match how it's actually used, not how it's implemented.
 
 ### Over-Engineering
 
 More abstraction, configurability, or generality than the problem requires.
-**Detection**: Interfaces with single implementations, factory-of-factory patterns, config for behavior that never changes, deep inheritance hierarchies.
+**Detection**: Interfaces with single implementations, factory-of-factory patterns, config for static behavior.
 **Resolution**: Inline the unnecessary abstraction. Prefer concrete code that can be generalized later if needed (YAGNI).
 
 ### Config Sprawl
 
 Configuration spread across many files, formats, and locations with unclear precedence.
-**Detection**: Multiple config file formats, environment variable overrides of overrides, "where does this setting come from?" is hard to answer.
+**Detection**: Multiple config file formats, environment variable overrides of overrides. Tracing the origin of a setting is difficult.
 **Resolution**: Consolidate into fewer config sources with documented precedence. Prefer convention over configuration.
 
 ## Decision Heuristics
 
 When evaluating which pattern to recommend, consider these questions:
 
-1. **How big is the team?** Small teams (<5) benefit from simplicity. Patterns that require coordination overhead (microservices, CQRS) often cost more than they save.
+1. **Team size.** Small teams (<5) benefit from simplicity. Patterns that require coordination overhead (microservices, CQRS) often cost more than they save.
 
-2. **What changes most often?** Organize code along the axis of most frequent change. If features change independently, use feature-based organization. If the data model changes, invest in good data abstractions.
+2. **Rate of change.** Organize code along the axis of most frequent change. Use feature-based organization for independent features. If the data model changes often, invest in good data abstractions.
 
-3. **What's the operational maturity?** Distributed architectures require monitoring, tracing, and deployment infrastructure. If the team doesn't have these, a monolith is more honest.
+3. **Operational maturity.** Distributed architectures require monitoring, tracing, and deployment infrastructure. If the team lacks these, a monolith is more honest.
 
-4. **Is this essential or accidental complexity?** Only invest in patterns that address real problems. If the current approach works and the team understands it, the best redesign might be no redesign.
+4. **Essential vs. accidental complexity.** Only invest in patterns that address real problems. If the current approach works and the team understands it, the best redesign might be none.
 
-5. **Can the team maintain it?** The best architecture is one the team can understand, evolve, and debug. A theoretically superior architecture that nobody on the team groks is worse than a simple one they can reason about.
+5. **Team capability.** The best architecture is one the team can understand, evolve, and debug. A theoretically superior architecture that nobody groks is worse than a simple one they can reason about.

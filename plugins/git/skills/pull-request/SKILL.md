@@ -1,11 +1,11 @@
 ---
 name: pull-request
-description: Create and update GitHub pull requests with automatic rebase, conflict resolution, and description generation. Use this skill whenever the user wants to create a PR, open a pull request, push and create a PR, submit changes for review, update a PR description, or says things like "PRを作って", "プルリクエスト作成", "レビューに出したい", "PRお願い", "create a PR", "open a pull request", "submit for review", "push and create PR". Also use when the user has finished working on a feature branch and wants to merge it.
+description: Create and update GitHub pull requests with automatic rebase and conflict resolution. Trigger phrases include "PRを作って", "プルリクエスト作成", "レビューに出したい", "create a PR", "open a pull request".
 ---
 
 # pull-request
 
-Automate the full pull request workflow: rebase onto the base branch, resolve conflicts, push, and create or update a GitHub PR with a well-structured description.
+Automate the PR workflow: rebase onto the base branch, resolve conflicts, push, and create or update the pull request.
 
 ## Prerequisites
 
@@ -52,8 +52,8 @@ git rebase origin/{base-branch}
 
 1. Identify conflicting files from `git diff --name-only --diff-filter=U`.
 2. For each conflicting file, read the file and examine the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`).
-3. **Trivial conflicts** (e.g., import ordering, adjacent non-overlapping edits): resolve automatically by choosing the correct combination, then `git add {file}`.
-4. **Non-trivial conflicts** (semantic differences, logic changes): show the conflict to the user with context and ask which resolution to apply.
+3. **Trivial conflicts** (e.g., import ordering, adjacent edits): resolve automatically and run `git add {file}`.
+4. **Non-trivial conflicts** (semantic or logic changes): show the conflict to the user and ask which resolution to apply.
 5. After resolving all conflicts in a step: `git rebase --continue`.
 6. Repeat until rebase finishes.
 
